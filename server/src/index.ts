@@ -1,7 +1,7 @@
-function greetUser(username: string): string {
-  // username অবশ্যই string হতে হবে এবং ফাংশনটি string রিটার্ন করবে
-  return `Welcome to TaskFlow Pro, ${username}!`;
-}
+import { logMessage } from "./utils/logger.js";
 
-const user = "Anwar";
-console.log(greetUser(user));
+const serverPort: number = 3000;
+const appName = "TaskFlow Pro";
+
+logMessage(`Starting server for ${appName}...`);
+logMessage(`Server successfully running on port: ${serverPort}`);
