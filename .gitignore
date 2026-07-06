@@ -53,6 +53,7 @@ server/src/generated/*
 
 # Project dist/output files
 server/dist/*
+client/dist/*
 
 # Project env files
 client/.env*
