@@ -1,15 +1,18 @@
-import express, { Request, Response } from "express";
-import { config } from "./config/env.js"; // কাস্টম কনফিগ ইম্পোর্ট করলাম
+import express from "express";
+import { config } from "./config/env.js";
+import { requestLogger } from "./middlewares/logger.middleware.js";
+import taskRouter from "./routes/task.routes.js"; // রাউটার ইম্পোর্ট করলাম
 import { logMessage } from "./utils/logger.js";
 
 const app = express();
 app.use(express.json());
 
-app.get("/", (req: Request, res: Response) => {
-  res.json({ message: "TaskFlow Pro API is running!" });
-});
+// গ্লোবাল রিকোয়েস্ট লগার মিডলওয়্যার যুক্ত করা হলো
+app.use(requestLogger);
 
-// কনফিগ থেকে টাইপ-সেফ পোর্ট রিড করা হলো
+// রাউটার মাউন্ট করা হলো
+app.use("/api/tasks", taskRouter);
+
 app.listen(config.port, () => {
-  logMessage(`Server listening on port ${config.port} in [${config.env}] mode`);
+  logMessage(`Server listening on port ${config.port}`);
 });
